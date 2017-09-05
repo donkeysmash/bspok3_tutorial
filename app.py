@@ -4,7 +4,6 @@ from flask import Flask
 from flask_restful import Resource, Api
 from flask_pymongo import PyMongo
 
-MONGO_DBNAME='ArcWrightDB'
 app = Flask(__name__)
 api = Api(app)
 mongo = PyMongo(app)
