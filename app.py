@@ -1,0 +1,24 @@
+import logging
+import pprint
+from flask import Flask
+from flask_restful import Resource, Api
+from flask_pymongo import PyMongo
+
+MONGO_DBNAME='ArcWrightDB'
+app = Flask(__name__)
+api = Api(app)
+mongo = PyMongo(app)
+
+
+class HelloWorld(Resource):
+    def get(self):
+        logging.info('getting')
+        print('getting...')
+        print(mongo.db['donkey'].find_one())
+        return {'hello': 'world'}
+
+
+api.add_resource(HelloWorld, '/')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
