@@ -1,3 +1,4 @@
+
 import {
   VisibilityFilters,
   ADD_TODO, TOGGLE_TODO
@@ -7,6 +8,23 @@ const initialState = {
   todos: [],
   visibilityFilter: VisibilityFilters.SHOW_ALL
 };
+
+function todos(state=[], action) {
+  switch (action.type) {
+    case ADD_TODO:
+      return Object.assign({}, state, {
+        todos: [
+          ...state.todos,
+          {
+            text: actions.text,
+            completed: false
+          }
+        ]
+      });
+    // case TOGGLE_TODO:
+      // return 
+  }
+}
 
 function todoApp(state = initialState, action) {
   switch (action.type) {
