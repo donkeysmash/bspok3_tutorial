@@ -13,8 +13,7 @@ class HelloWorld(Resource):
     def get(self):
         logging.info('getting')
         print('getting...')
-        print(mongo.db['donkey'].find_one())
-        return {'hello': 'world'}
+        return {'hello': 'worlddddd'}
 
 
 api.add_resource(HelloWorld, '/')
