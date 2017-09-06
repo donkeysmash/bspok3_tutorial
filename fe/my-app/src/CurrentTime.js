@@ -19,7 +19,7 @@ class CurrentTime extends Component {
 
   tick() {
     this.setState({
-      date: new Date()
+      time: new Date()
     });
   }
 
