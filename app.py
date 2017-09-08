@@ -3,26 +3,33 @@ import pprint
 import os
 from flask import Flask, jsonify
 from flask_restful import Resource, Api, reqparse
-from model.donkey import DonkeyModel
+from dao.donkey_dao import DonkeyDAO
+from util.config import host_ip
 
-isDocker = True if os.environ['USER'] == 'docker' else False
 
 app = Flask(__name__)
-app.config['MONGO_DBNAME'] = 'animal'
-app.config['MONGO_HOST'] = 'mongo' if isDocker else None
-host_ip = '0.0.0.0' if isDocker else 'localhost'
 
 api = Api(app)
 parser = reqparse.RequestParser()
-# mongo = PyMongo(app)
-
 
 class Donkeys(Resource):
     def get(self):
-        all_donkeys = DonkeyModel.dao.get_all()
-        return all_donkeys
+        return DonkeyDAO().get_all(), 200
+
+    def post(self): 
+        return DonkeyDAO().post(parser), 201
+
+
+class Donkey(Resource):
+    def get(self, donkey_id):
+        return DonkeyDAO().get_by_id(donkey_id), 201
+
+    def delete(self, donkey_id):
+        return DonkeyDAO().remove(donkey_id), 201
+        
 
 api.add_resource(Donkeys, '/donkeys')
+api.add_resource(Donkey, '/donkeys/<string:donkey_id>')
 
 if __name__ == '__main__':
     app.run(host=host_ip, port=5000, debug=True)
