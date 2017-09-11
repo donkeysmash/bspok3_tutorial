@@ -1,7 +1,8 @@
 {
   "isFetching": true,
   "animalType": "donkey",
-  "donkeys": [{
+  "donkeys": [
+    {
       "id": "b9923jgjsdlkjqnwqmzc",
       "name": "mega donkey",
       "age": 42

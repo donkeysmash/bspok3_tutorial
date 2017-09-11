@@ -7,11 +7,11 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import AnimalMarket from './components/AnimalMarket';
+import DonkeyMarket from './containers/Donkeys';
 import Home from './components/Home';
+import donkeyList from './reducers/reducers';
 
-let store = createStore(()=>{});
-
+let store = createStore(donkeyList);
 
 class App extends Component {
   render() {
@@ -20,11 +20,11 @@ class App extends Component {
         <Router>
           <div>
             <Route exact path="/" component={Home}/>
-            <Route path="/animalmarket" component={AnimalMarket}/>
+            <Route path="/donkeymarket" component={DonkeyMarket}/>
             <hr />
             <ul>
               <li><Link to="/">Home</Link></li>
-              <li><Link to="/animalmarket">Animal Market</Link></li>
+              <li><Link to="/donkeymarket">Donkey Market</Link></li>
             </ul>
           </div>
         </Router>

@@ -7,12 +7,21 @@ import {
 const initialState = {
   isFetching: false,
   animalType: "donkey",
-  donkeys: [],
+  donkeys: [
+    {
+      "id": "b9923jgjsdlkjqnwqmzc",
+      "name": "mega donkey",
+      "age": 42
+    }, {
+      "id": "abjbj099022bzmzxdfna",
+      "name": "beidou",
+      "age": 21
+    }
+  ],
   receivedAt: 0
 };
 
-
-function donkeyList(state = initialState, action) {
+const donkeyList = (state = initialState, action) => {
   switch(action.type) {
     case RECEIVE_DONKEYS:
       return Object.assign({}, state, {
@@ -24,4 +33,7 @@ function donkeyList(state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+
+export default donkeyList;
