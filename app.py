@@ -38,4 +38,3 @@ api.add_resource(Donkey, '/donkeys/<string:donkey_id>')
 if __name__ == '__main__':
     app.debug = True
     app.run(host=host_ip, port=5000, debug=True)
-

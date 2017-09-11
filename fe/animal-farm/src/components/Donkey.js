@@ -1,16 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-
-const Item = ({ name, age }) => (
+const Donkey = ({ name, age }) => (
   <li>
     {name} {age}
   </li>
 );
 
-Item.propTypes = {
+Donkey.propTypes = {
   name: PropTypes.string.isRequired,
   age: PropTypes.number.isRequired
 };
 
-export default Item;
+export default Donkey;
