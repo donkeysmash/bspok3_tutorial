@@ -3,11 +3,13 @@ import pprint
 import os
 from flask import Flask, jsonify
 from flask_restful import Resource, Api, reqparse
+from flask_cors import CORS
 from dao.donkey_dao import DonkeyDAO
 from util.config import host_ip
 
 
 app = Flask(__name__)
+CORS(app)
 
 api = Api(app)
 parser = reqparse.RequestParser()
