@@ -7,17 +7,7 @@ import {
 const initialState = {
   isFetching: false,
   animalType: "donkey",
-  donkeys: [
-    {
-      "id": "b9923jgjsdlkjqnwqmzc",
-      "name": "mega donkey",
-      "age": 42
-    }, {
-      "id": "abjbj099022bzmzxdfna",
-      "name": "beidou",
-      "age": 21
-    }
-  ],
+  donkeys: [],
   receivedAt: 0
 };
 
