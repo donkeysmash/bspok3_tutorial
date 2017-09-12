@@ -2,3 +2,4 @@ flask
 Flask-PyMongo
 flask-restful
 flask-cors
+names

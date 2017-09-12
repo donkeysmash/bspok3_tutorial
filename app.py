@@ -12,7 +12,6 @@ app = Flask(__name__)
 CORS(app)
 
 api = Api(app)
-parser = reqparse.RequestParser()
 
 class Donkeys(Resource):
     def get(self):
@@ -21,21 +20,35 @@ class Donkeys(Resource):
 
     def post(self): 
         print('posting a donkey')
-        return DonkeyDAO().post(parser), 201
+        parser = reqparse.RequestParser()
+        return DonkeyDAO().post(parser), 200
 
 
 class Donkey(Resource):
     def get(self, donkey_id):
         print('getting one donkey')
-        return DonkeyDAO().get_by_id(donkey_id), 201
+        return DonkeyDAO().get_by_id(donkey_id), 200
 
     def delete(self, donkey_id):
         print('deleting all donkeys')
-        return DonkeyDAO().remove(donkey_id), 201
+        return DonkeyDAO().remove(donkey_id), 200
+
+class Donkey_Populate(Resource):
+    def post(self):
+        print('populating with random donkeys')
+        parser = reqparse.RequestParser()
+        return DonkeyDAO().populate_with_random(parser), 200
+
+class Donkey_Purge(Resource):
+    def post(self):
+        print('purging donkeys')
+        return DonkeyDAO().purge(), 200
         
 
 api.add_resource(Donkeys, '/donkeys')
 api.add_resource(Donkey, '/donkeys/<string:donkey_id>')
+api.add_resource(Donkey_Populate, '/donkeys/populate')
+api.add_resource(Donkey_Purge, '/donkeys/purge')
 
 if __name__ == '__main__':
     app.debug = True
