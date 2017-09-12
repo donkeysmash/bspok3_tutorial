@@ -1,17 +1,40 @@
-export const REQUEST_DONKEYS = 'REQUEST_DONKEYS';
-export const RECEIVE_DONKEYS = 'RECEIVE_DONKEYS'; 
+const url = 'http://192.168.99.100:5000/donkeys';
+const GET = 'GET';
+const POST = 'POST';
+const DELETE = 'DELETE';
 
+export const REQUEST_START = 'REQUEST_START';
+export const RECEIVE_DONKEYS = 'RECEIVE_DONKEYS';
 
 export const requestDonkeys = (dispatch) => {
-  dispatch({ type: REQUEST_DONKEYS });
-  fetch('http://192.168.99.100:5000/donkeys')
-  .then(response => response.json())
-  .then(json => dispatch(receiveDonkeys(json)))
+  dispatch({ type: REQUEST_START });
+  refreshDonkeys(dispatch);
 };
+
+export const populateDonkeys = (dispatch) => {
+  dispatch({ type: REQUEST_START });
+  apiCall(POST, '/populate')
+  .then(refreshDonkeys(dispatch));
+};
+
+export const purgeDonkeys = (dispatch) => {
+  dispatch({ type: REQUEST_START });
+  apiCall(POST, '/purge')
+  .then(refreshDonkeys(dispatch));
+};
+
+const refreshDonkeys = (dispatch) => {
+  apiCall(GET, '')
+  .then(response => response.json())
+  .then(json => dispatch(receiveDonkeys(json)));
+};
+
 const receiveDonkeys = (data) => ({
   type: RECEIVE_DONKEYS,
   donkeys: data,
   receivedAt: Date.now()
 });
 
-
+const apiCall = (method, endpoint) => {
+  return fetch(`${url}${endpoint}`, {method});
+};

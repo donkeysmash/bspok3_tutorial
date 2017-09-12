@@ -1,28 +1,35 @@
+import { fromJS } from 'immutable';
 import {
-  REQUEST_DONKEYS,
+  REQUEST_START,
   RECEIVE_DONKEYS,
   receiveDonkeys
 } from '../actions/actions';
 
 const initialState = {
   isFetching: false,
-  animalType: "donkey",
+  animalType: 'donkey',
   donkeys: [],
   receivedAt: 0
 };
 
 const donkeyList = (state = initialState, action) => {
-  switch(action.type) {
+  const {type, donkeys, receivedAt} = action;
+  switch(type) {
     case RECEIVE_DONKEYS:
+      // return fromJS({
+        // isFetching: false,
+        // animalType: "donkey",
+        // donkeys: donkeys,
+        // receivedAt: receivedAt
+      // });
       return Object.assign({}, state, {
         isFetching: false,
-        animalType: "donkey",
-        donkeys: action.donkeys
+        donkeys,
+        receivedAt
       });
-    case REQUEST_DONKEYS:
+    case REQUEST_START:
       return Object.assign({}, state, {
-        isFetching: true,
-        animalType: "donkey"
+        isFetching: true
       });
     default:
       return state;
