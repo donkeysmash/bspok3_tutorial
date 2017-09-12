@@ -9,12 +9,31 @@ import {
 } from '../actions/actions';
 
 class Donkeys extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      populateCount: 10
+    };
+  }
+
   componentDidMount() {
     requestDonkeys(this.props.dispatch);
   }
 
+  // TODO: Broken UX cannot delete all the numbers
+  handleInputChange(e) {
+    let count = parseInt(e.target.value)
+    if (count) {
+      this.setState({
+        populateCount: count
+      });
+    }
+  }
+
   render() {
     const { donkeys, animalType, isFetching, receivedAt } = this.props.state;
+    const {populateCount} = this.state;
+    const plural = populateCount === 1 ? '': 's';
     return (
       <div>
         <h3>{animalType}</h3>
@@ -22,10 +41,11 @@ class Donkeys extends Component {
         <form
           onSubmit={e => {
             e.preventDefault()
-            populateDonkeys(this.props.dispatch)
+            populateDonkeys(this.props.dispatch, this.state.populateCount)
           }}
         >
-          <button type='submit'>Populate Donkeys</button>
+          <input type='text' value={populateCount} onChange={(e) => this.handleInputChange(e)} />
+          <input type='submit' value={`Populate ${this.state.populateCount} Donkey${plural}`} />
         </form>
         <form
           onSubmit={e => {

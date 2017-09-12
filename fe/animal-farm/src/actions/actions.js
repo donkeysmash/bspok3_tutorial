@@ -11,20 +11,22 @@ export const requestDonkeys = (dispatch) => {
   refreshDonkeys(dispatch);
 };
 
-export const populateDonkeys = (dispatch) => {
+export const populateDonkeys = (dispatch, populateCount) => {
   dispatch({ type: REQUEST_START });
-  apiCall(POST, '/populate')
+  var formData = new FormData();
+  formData.append('count', populateCount);
+  apiCall('/populate', POST, formData)
   .then(refreshDonkeys(dispatch));
 };
 
 export const purgeDonkeys = (dispatch) => {
   dispatch({ type: REQUEST_START });
-  apiCall(POST, '/purge')
+  apiCall('/purge', POST)
   .then(refreshDonkeys(dispatch));
 };
 
 const refreshDonkeys = (dispatch) => {
-  apiCall(GET, '')
+  apiCall('', GET)
   .then(response => response.json())
   .then(json => dispatch(receiveDonkeys(json)));
 };
@@ -35,6 +37,9 @@ const receiveDonkeys = (data) => ({
   receivedAt: Date.now()
 });
 
-const apiCall = (method, endpoint) => {
-  return fetch(`${url}${endpoint}`, {method});
+const apiCall = (endpoint, method, formdata) => {
+  return fetch(`${url}${endpoint}`, {
+    method: method,
+    body: formdata
+  });
 };
