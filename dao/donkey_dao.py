@@ -39,10 +39,7 @@ class DonkeyDAO:
 
     def populate_with_random(self, parser):
         parser.add_argument('count')
-        count = int(parser.parse_args()['count'])
-
-        if (count == None):
-            count = 10
+        count = int(parser.parse_args()['count'] or 10)
 
         bulk = []
         for i in range(0, count):
