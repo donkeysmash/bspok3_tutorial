@@ -8,8 +8,8 @@ const Donkey = ({ name, age }) => (
 );
 
 Donkey.propTypes = {
-  name: PropTypes.string.isRequired,
-  age: PropTypes.number.isRequired
+  age: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 export default Donkey;

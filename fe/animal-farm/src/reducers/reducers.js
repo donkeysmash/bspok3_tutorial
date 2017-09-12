@@ -30,6 +30,10 @@ const donkeyList = (state = initialState, action) => {
         donkeys: action.donkeys
       });
     case REQUEST_DONKEYS:
+      return Object.assign({}, state, {
+        isFetching: true,
+        animalType: "donkey"
+      });
     default:
       return state;
   }

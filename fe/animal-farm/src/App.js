@@ -11,7 +11,10 @@ import DonkeyMarket from './containers/Donkeys';
 import Home from './components/Home';
 import donkeyList from './reducers/reducers';
 
-let store = createStore(donkeyList);
+let store = createStore(
+  donkeyList,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 class App extends Component {
   render() {
@@ -34,4 +37,3 @@ class App extends Component {
 }
 
 export default App;
-
