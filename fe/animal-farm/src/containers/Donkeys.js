@@ -22,12 +22,13 @@ class Donkeys extends Component {
 
   // TODO: Broken UX cannot delete all the numbers
   handleInputChange(e) {
-    let count = parseInt(e.target.value)
-    if (count) {
-      this.setState({
-        populateCount: count
-      });
+    let count = parseInt(e.target.value) || 1;
+    if (count > 1000) {
+      count = 1000;
     }
+    this.setState({
+      populateCount: count
+    });
   }
 
   render() {
