@@ -5,10 +5,11 @@ const DELETE = 'DELETE';
 
 export const REQUEST_START = 'REQUEST_START';
 export const RECEIVE_DONKEYS = 'RECEIVE_DONKEYS';
+export const CHANGE_ANIMAL_TYPE = 'CHANGE_ANIMAL_TYPE';
 
 export const requestDonkeys = (dispatch) => {
   dispatch({ type: REQUEST_START });
-  refreshDonkeys(dispatch);
+  getDonkeys(dispatch);
 };
 
 export const populateDonkeys = (dispatch, populateCount) => {
@@ -16,16 +17,21 @@ export const populateDonkeys = (dispatch, populateCount) => {
   var formData = new FormData();
   formData.append('count', populateCount);
   apiCall('/populate', POST, formData)
-  .then(refreshDonkeys(dispatch));
+  .then(getDonkeys(dispatch));
 };
 
 export const purgeDonkeys = (dispatch) => {
   dispatch({ type: REQUEST_START });
   apiCall('/purge', POST)
-  .then(refreshDonkeys(dispatch));
+  .then(getDonkeys(dispatch));
 };
 
-const refreshDonkeys = (dispatch) => {
+export const selectAnimalType = (targetAnimals) => ({
+  type: CHANGE_ANIMAL_TYPE,
+  targetAnimals
+});
+
+const getDonkeys = (dispatch) => {
   apiCall('', GET)
   .then(response => response.json())
   .then(json => dispatch(receiveDonkeys(json)));

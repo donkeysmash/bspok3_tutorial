@@ -18,7 +18,7 @@ class Donkeys(Resource):
         print('getting all donkeys')
         return DonkeyDAO().get_all(), 200
 
-    def post(self): 
+    def post(self):
         print('posting a donkey')
         parser = reqparse.RequestParser()
         return DonkeyDAO().post(parser), 200
@@ -43,7 +43,6 @@ class Donkey_Purge(Resource):
     def post(self):
         print('purging donkeys')
         return DonkeyDAO().purge(), 200
-        
 
 api.add_resource(Donkeys, '/donkeys')
 api.add_resource(Donkey, '/donkeys/<string:donkey_id>')
