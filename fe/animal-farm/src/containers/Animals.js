@@ -1,68 +1,45 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Donkeys from './Donkeys';
+import {requestDonkeys} from '../actions/actions';
 
 class Animals extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showing: []
+      showing: ['donkeys']
     };
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
   }
 
-  // genShowing(arr, target, isAdding) {
-    // let set = new Set([...arr]);
-    // if (isAdding) {
-      // return Array.from(set.add(target));
-    // }
-    // set.delete(target);
-    // return Array.from(set);
-  // }
+  componentWillMount() {
+    requestDonkeys(this.props.dispatch);
+  }
 
   handleCheckboxChange(e) {
     const name = e.target.name;
     const isChecked = e.target.checked;
     let nextShowing = new Set(this.state.showing);
     isChecked ? nextShowing.add(name) : nextShowing.delete(name);
-
-    // if (isChecked) {
-      // nextShowing.add(name);
-    // } else {
-      // nextShowing.delete(name);
-    // }
     this.setState({ showing: Array.from(nextShowing) });
   }
 
   render() {
-    // return (
-      // <label>Donkeys
-        // <input
-          // name='donkeys'
-          // type='checkbox'
-          // checked={this.state.showing.includes('donkeys')}
-          // onChange={this.handleCheckboxChange}
-        // />
-      // </label>
-    // );
-    console.log('in render this.state.showing : ', this.state.showing)
-    const testAnimalList = ['donkeys', 'snakes', 'pigs', 'lions'];
-    let animals = testAnimalList.map(testAnimal => {
-      return (
-        <label>{testAnimal}
+    const showingDonkey = this.state.showing.includes('donkeys');
+    return (
+      <div>
+        <label>Donkeys
           <input
-            name={testAnimal}
+            name='donkeys'
             type='checkbox'
-            checked={this.state.showing.includes(testAnimal)}
+            checked={showingDonkey}
             onChange={this.handleCheckboxChange}
           />
         </label>
-      );
-    });
-    return (
-      <div>
-        {animals}
+        {showingDonkey ? <Donkeys /> : null}
       </div>
     );
   }
 }
-export default Animals;
+
+export default connect()(Animals);

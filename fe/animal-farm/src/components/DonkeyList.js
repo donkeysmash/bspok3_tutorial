@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Donkey from './Donkey'
 
-const DonkeyList = ({ donkeys }) => {
+const DonkeyList = ({ donkeys, onPopulateClick }) => {
   const {isFetching, receivedAt, data} = donkeys;
   return (
     <div>
@@ -17,6 +17,7 @@ const DonkeyList = ({ donkeys }) => {
           )}
         </ul>)
       }
+      <button onClick={onPopulateClick(10)}>populate</button>
       <p>{(new Date(receivedAt)).toString()}</p>
     </div>
   );
@@ -26,3 +27,8 @@ DonkeyList.propTypes = {
 };
 
 export default DonkeyList;
+
+
+/*
+
+*/

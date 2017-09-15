@@ -13,11 +13,13 @@ export const requestDonkeys = (dispatch) => {
 };
 
 export const populateDonkeys = (dispatch, populateCount) => {
-  dispatch({ type: REQUEST_START });
-  var formData = new FormData();
-  formData.append('count', populateCount);
-  apiCall('/populate', POST, formData)
-  .then(getDonkeys(dispatch));
+  // console.log(dispatch)
+  // console.log(populateCount)
+  // dispatch({ type: REQUEST_START });
+  // var formData = new FormData();
+  // formData.append('count', populateCount);
+  // apiCall('/populate', POST, formData)
+  // .then(getDonkeys(dispatch));
 };
 
 export const purgeDonkeys = (dispatch) => {
